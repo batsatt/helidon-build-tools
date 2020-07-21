@@ -24,8 +24,8 @@ import java.util.function.Function;
 import io.helidon.build.util.OSType;
 
 import static io.helidon.build.util.OSType.currentOS;
-import static io.helidon.build.util.StyleFunction.Bold;
-import static io.helidon.build.util.StyleFunction.BoldBrightYellow;
+import static io.helidon.build.util.Style.bold;
+import static io.helidon.build.util.Style.boldBrightYellow;
 
 /**
  * Shared constants.
@@ -113,16 +113,16 @@ public final class Constants {
      * The help message to log if the script execution policy error occurs.
      */
     public static final String WINDOWS_SCRIPT_EXECUTION_POLICY_ERROR_HELP =
-        EOL
-        + EOL
-        + Bold.apply("To enable script execution, run the following command: ")
-        + EOL
-        + EOL
-        + "    "
-        + BoldBrightYellow.apply("powershell Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned")
-        + EOL
-        + EOL
-        + Bold.apply("and answer 'Y' if prompted.");
+            EOL
+            + EOL
+            + bold().apply("To enable script execution, run the following command: ")
+            + EOL
+            + EOL
+            + "    "
+            + boldBrightYellow().apply("powershell Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned")
+            + EOL
+            + EOL
+            + bold().apply("and answer 'Y' if prompted.");
 
     private Constants() {
     }

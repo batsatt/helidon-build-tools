@@ -38,7 +38,7 @@ import static io.helidon.build.util.Log.Level.ERROR;
 import static io.helidon.build.util.Log.Level.INFO;
 import static io.helidon.build.util.Log.Level.VERBOSE;
 import static io.helidon.build.util.Log.Level.WARN;
-import static io.helidon.build.util.StyleFunction.Red;
+import static io.helidon.build.util.Style.red;
 
 /**
  * The command context.
@@ -159,7 +159,7 @@ public final class CommandContext {
                             if (Style.isStyled(ce.getMessage())) {
                                 exit(ce.getMessage(), null, INFO, 1);
                             } else {
-                                exit(Red.apply(ce.getMessage()), null, INFO, 1);
+                                exit(red().apply(ce.getMessage()), null, INFO, 1);
                             }
                         }, () -> exit(failure.getMessage(), failure, ERROR, 1));
                     } else {

@@ -24,8 +24,8 @@ import java.util.concurrent.TimeUnit;
 
 import static io.helidon.build.util.FileUtils.assertDir;
 import static io.helidon.build.util.ProjectConfig.ensureProjectConfig;
-import static io.helidon.build.util.StyleFunction.Blue;
-import static io.helidon.build.util.StyleFunction.BoldBrightCyan;
+import static io.helidon.build.util.Style.blue;
+import static io.helidon.build.util.Style.boldBrightCyan;
 
 /**
  * Simple generator for a application project. This class does not import any Maven classes
@@ -171,7 +171,7 @@ public class ApplicationGenerator {
      */
     public Path generate() {
         initialize();
-        Log.info("Creating %s using version %s", BoldBrightCyan.apply(artifactId), Blue.apply(version));
+        Log.info("Creating %s using version %s", boldBrightCyan().apply(artifactId), blue().apply(version));
         String archetypeId = HELIDON_ARCHETYPES_PREFIX + archetypeName  + "-" + variant.toString();
         execute(new ProcessBuilder().directory(parentDirectory.toFile())
                                     .command(List.of(MAVEN_EXEC,

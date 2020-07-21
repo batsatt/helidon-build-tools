@@ -15,7 +15,8 @@
  */
 package io.helidon.build.util;
 
-import static io.helidon.build.util.StyleFunction.Bold;
+
+import static io.helidon.build.util.Style.bold;
 
 /**
  * Constants supporting coordination between {@code DevLoop} and {@code DevCommand}.
@@ -30,7 +31,7 @@ public class DevLoopMessages {
     /**
      * Styled dev loop message prefix.
      */
-    public static final String DEV_LOOP_STYLED_MESSAGE_PREFIX = Bold.apply(DEV_LOOP_MESSAGE_PREFIX);
+    public static final String DEV_LOOP_STYLED_MESSAGE_PREFIX = bold().apply(DEV_LOOP_MESSAGE_PREFIX);
 
     /**
      * Message content when the dev loop has started.

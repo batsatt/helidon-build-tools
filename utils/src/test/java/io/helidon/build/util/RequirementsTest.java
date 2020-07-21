@@ -23,8 +23,8 @@ import org.fusesource.jansi.Ansi;
 import org.junit.jupiter.api.Test;
 
 import static io.helidon.build.util.Requirements.failed;
-import static io.helidon.build.util.StyleFunction.BoldRed;
-import static io.helidon.build.util.StyleFunction.Cyan;
+import static io.helidon.build.util.Style.boldRed;
+import static io.helidon.build.util.Style.cyan;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
@@ -79,7 +79,7 @@ class RequirementsTest {
     @Test
     void testAnsiColors() {
         Ansi.setEnabled(true);
-        String expected = "This is " + BoldRed.apply("bold red") + " text, and this is " + Cyan.apply("cyan") + " text.";
+        String expected = "This is " + boldRed().apply("bold red") + " text, and this is " + cyan().apply("cyan") + " text.";
         try {
             failed("This is $(RED %s) text, and this is $(cyan %s) text.", "bold red", "cyan");
             fail("Should have failed!");

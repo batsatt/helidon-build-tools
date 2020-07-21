@@ -30,7 +30,7 @@ import io.helidon.build.util.Log;
 import io.helidon.build.util.MavenCommand;
 import io.helidon.build.util.MavenVersion;
 import io.helidon.build.util.ProjectConfig;
-import io.helidon.build.util.StyleFunction;
+import io.helidon.build.util.Style;
 
 import static io.helidon.build.cli.harness.CommandContext.Verbosity.DEBUG;
 import static io.helidon.build.cli.harness.CommandContext.Verbosity.NORMAL;
@@ -45,8 +45,9 @@ import static io.helidon.build.util.DevLoopMessages.DEV_LOOP_SERVER_STARTING;
 import static io.helidon.build.util.DevLoopMessages.DEV_LOOP_START;
 import static io.helidon.build.util.DevLoopMessages.DEV_LOOP_STYLED_MESSAGE_PREFIX;
 import static io.helidon.build.util.MavenVersion.toMavenVersion;
-import static io.helidon.build.util.StyleFunction.Bold;
-import static io.helidon.build.util.StyleFunction.BoldBrightGreen;
+import static io.helidon.build.util.Style.bold;
+import static io.helidon.build.util.Style.boldBrightGreen;
+import static io.helidon.build.util.Style.red;
 
 /**
  * The {@code dev} command.
@@ -64,6 +65,7 @@ public final class DevCommand extends BaseCommand {
     private static final String MAVEN_ERROR_LEVEL = "ERROR";
     private static final String MAVEN_FATAL_LEVEL = "FATAL";
     private static final String SLF4J_PREFIX = "SLF4J:";
+    private static final Style RED = red();
 
     private final CommonOptions commonOptions;
     private final boolean clean;
@@ -110,7 +112,7 @@ public final class DevCommand extends BaseCommand {
         if (terminalMode) {
             clearScreen();
             System.out.println();
-            System.out.print(Bold.apply("helidon dev ") + BoldBrightGreen.apply("starting "));
+            System.out.print(bold().apply("helidon dev ") + boldBrightGreen().apply("starting "));
             System.out.flush();
             terminalModeOutput = new TerminalModeOutput();
         }
@@ -175,7 +177,7 @@ public final class DevCommand extends BaseCommand {
     }
 
     private static void printStdErrLine(String line) {
-        System.out.println(StyleFunction.Red.apply(line));
+        System.out.println(RED.apply(line));
     }
 
     /**

@@ -39,7 +39,8 @@ import static io.helidon.build.util.Constants.EOL;
 import static io.helidon.build.util.FileUtils.assertDir;
 import static io.helidon.build.util.FileUtils.assertJavaExecutable;
 import static io.helidon.build.util.FileUtils.listFiles;
-import static io.helidon.build.util.StyleFunction.Bold;
+import static io.helidon.build.util.Style.bold;
+import static io.helidon.build.util.Style.red;
 import static java.io.File.pathSeparatorChar;
 import static java.util.Objects.requireNonNull;
 
@@ -57,6 +58,7 @@ public class MavenCommand {
     private static final AtomicReference<Path> MAVEN_EXECUTABLE = new AtomicReference<>();
     private static final AtomicReference<Path> MAVEN_HOME = new AtomicReference<>();
     private static final AtomicReference<MavenVersion> MAVEN_VERSION = new AtomicReference<>();
+    private static final Style RED = red();
     private static final String VERSION_ERROR = "$(RED Found Maven version %s.)"
                                                 + EOL
                                                 + "$(bold Version) $(GREEN %s) $(bold or later is required.) "
@@ -206,7 +208,7 @@ public class MavenCommand {
     public void execute() throws Exception {
         // Fork process and wait for its completion
         if (name != null) {
-            Log.info("%s", Bold.apply(name));
+            Log.info("%s", bold().apply(name));
         }
         ProcessMonitor processMonitor = ProcessMonitor.builder()
                                                       .processBuilder(processBuilder)
@@ -512,7 +514,7 @@ public class MavenCommand {
         }
 
         private static void printRedLineErr(String line) {
-            System.out.println(StyleFunction.Red.apply(line));
+            System.out.println(RED.apply(line));
         }
     }
 }

@@ -25,11 +25,10 @@ import io.helidon.build.util.Log.Level;
 
 import static io.helidon.build.util.Constants.EOL;
 import static io.helidon.build.util.Log.Level.DEBUG;
-import static io.helidon.build.util.StyleFunction.BoldYellow;
-import static io.helidon.build.util.StyleFunction.Italic;
-import static io.helidon.build.util.StyleFunction.ItalicRed;
-import static io.helidon.build.util.StyleFunction.Plain;
-import static io.helidon.build.util.StyleFunction.Red;
+import static io.helidon.build.util.Style.boldYellow;
+import static io.helidon.build.util.Style.italic;
+import static io.helidon.build.util.Style.plain;
+import static io.helidon.build.util.Style.red;
 
 /**
  * {@link Log.Writer} that writes to {@link System#out} and {@link System#err}. Supports use of
@@ -37,21 +36,22 @@ import static io.helidon.build.util.StyleFunction.Red;
  */
 public final class SystemLogWriter implements Log.Writer {
     private static final boolean STYLES_ENABLED = AnsiConsoleInstaller.areAnsiEscapesEnabled();
-    private static final String WARN_PREFIX = STYLES_ENABLED ? BoldYellow.apply("warning: ") : "WARNING: ";
-    private static final String ERROR_PREFIX = STYLES_ENABLED ? Red.apply("error: ") : "ERROR: ";
+    private static final String WARN_PREFIX = STYLES_ENABLED ? boldYellow().apply("warning: ") : "WARNING: ";
+    private static final String ERROR_PREFIX = STYLES_ENABLED ? red().apply("error: ") : "ERROR: ";
     private static final String DEFAULT_LEVEL = "info";
     private static final String LEVEL_PROPERTY = "log.level";
-    private static final Map<Level, StyleFunction> DEFAULT_STYLES = defaultStyles();
-    private final Map<Level, StyleFunction> styles;
+    private static final Style PLAIN = plain();
+    private static final Map<Level, Style> DEFAULT_STYLES = defaultStyles();
+    private final Map<Level, Style> styles;
     private int ordinal;
 
-    private static Map<Level, StyleFunction> defaultStyles() {
-        final Map<Level, StyleFunction> styles = new EnumMap<>(Level.class);
-        styles.put(DEBUG, Italic);
-        styles.put(Level.VERBOSE, Plain);
-        styles.put(Level.INFO, Plain);
-        styles.put(Level.WARN, Plain);
-        styles.put(Level.ERROR, ItalicRed);
+    private static Map<Level, Style> defaultStyles() {
+        final Map<Level, Style> styles = new EnumMap<>(Level.class);
+        styles.put(DEBUG, italic());
+        styles.put(Level.VERBOSE, plain());
+        styles.put(Level.INFO, plain());
+        styles.put(Level.WARN, plain());
+        styles.put(Level.ERROR, plain());
         return styles;
     }
 
@@ -94,11 +94,11 @@ public final class SystemLogWriter implements Log.Writer {
      * @param styles The style to apply to messages at a given level.
      * @return The instance.
      */
-    public static SystemLogWriter create(Level level, Map<Level, StyleFunction> styles) {
+    public static SystemLogWriter create(Level level, Map<Level, Style> styles) {
         return new SystemLogWriter(level, styles);
     }
 
-    private SystemLogWriter(Level level, Map<Level, StyleFunction> styles) {
+    private SystemLogWriter(Level level, Map<Level, Style> styles) {
         this.styles = styles;
         level(level);
     }
@@ -186,7 +186,7 @@ public final class SystemLogWriter implements Log.Writer {
     }
 
     private String style(Level level, String message) {
-        final StyleFunction style = styles.get(level);
-        return style == Plain ? message : style.apply(message);
+        final Style style = styles.get(level);
+        return style == PLAIN ? message : style.apply(message);
     }
 }

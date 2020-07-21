@@ -30,6 +30,7 @@ import io.helidon.build.dev.ProjectSupplier;
 import io.helidon.build.dev.maven.EmbeddedMavenExecutor;
 import io.helidon.build.dev.maven.ForkedMavenExecutor;
 import io.helidon.build.util.Log;
+import io.helidon.build.util.Style;
 
 import static io.helidon.build.util.DevLoopMessages.DEV_LOOP_BUILD_COMPLETED;
 import static io.helidon.build.util.DevLoopMessages.DEV_LOOP_BUILD_FAILED;
@@ -39,16 +40,17 @@ import static io.helidon.build.util.DevLoopMessages.DEV_LOOP_HEADER;
 import static io.helidon.build.util.DevLoopMessages.DEV_LOOP_PROJECT_CHANGED;
 import static io.helidon.build.util.DevLoopMessages.DEV_LOOP_START;
 import static io.helidon.build.util.DevLoopMessages.DEV_LOOP_STYLED_MESSAGE_PREFIX;
-import static io.helidon.build.util.StyleFunction.Bold;
-import static io.helidon.build.util.StyleFunction.BoldBlue;
-import static io.helidon.build.util.StyleFunction.BoldRed;
-import static io.helidon.build.util.StyleFunction.BoldYellow;
+import static io.helidon.build.util.Style.bold;
 import static org.fusesource.jansi.Ansi.ansi;
 
 /**
  * A development loop that manages application lifecycle based on events from a {@link BuildLoop}.
  */
 public class DevLoop {
+    private static final Style BOLD = bold();
+    private static final Style BOLD_BLUE = Style.boldBlue();
+    private static final Style BOLD_RED = Style.boldRed();
+    private static final Style BOLD_YELLOW = Style.boldYellow();
     private static final int MAX_BUILD_WAIT_SECONDS = 5 * 60;
     private final boolean terminalMode;
     private final DevModeMonitor monitor;
@@ -93,7 +95,7 @@ public class DevLoop {
     static class DevModeMonitor implements BuildMonitor {
         private static final int ON_READY_DELAY = 1000;
         private static final int BUILD_FAIL_DELAY = 1000;
-        private static final String HEADER = Bold.apply(DEV_LOOP_HEADER);
+        private static final String HEADER = Style.bold().apply(DEV_LOOP_HEADER);
         private static final String LOG_PREFIX = DEV_LOOP_STYLED_MESSAGE_PREFIX + " ";
 
         private final boolean terminalMode;
@@ -135,7 +137,7 @@ public class DevLoop {
         @Override
         public void onChanged(int cycleNumber, ChangeType type) {
             header();
-            log("%s", BoldBlue.apply(type + " " + DEV_LOOP_PROJECT_CHANGED));
+            log("%s", BOLD_BLUE.apply(type + " " + DEV_LOOP_PROJECT_CHANGED));
             lastChangeType = type;
             ensureStop();
         }
@@ -143,13 +145,13 @@ public class DevLoop {
         @Override
         public void onBuildStart(int cycleNumber, BuildType type) {
             if (type == BuildType.Skipped) {
-                log("%s", BoldBlue.apply("up to date"));
+                log("%s", BOLD_BLUE.apply("up to date"));
             } else {
                 String operation = cycleNumber == 0 ? DEV_LOOP_BUILD_STARTING : "re" + DEV_LOOP_BUILD_STARTING;
                 if (type == BuildType.Incremental) {
-                    log("%s (%s)", BoldBlue.apply(operation), type);
+                    log("%s (%s)", BOLD_BLUE.apply(operation), type);
                 } else {
-                    log("%s", BoldBlue.apply(operation));
+                    log("%s", BOLD_BLUE.apply(operation));
                 }
                 buildStartTime = System.currentTimeMillis();
             }
@@ -161,14 +163,14 @@ public class DevLoop {
                 long elapsedTime = System.currentTimeMillis() - buildStartTime;
                 float elapsedSeconds = elapsedTime / 1000F;
                 String operation = cycleNumber == 0 ? "build " : "rebuild ";
-                log("%s (%.1f seconds)", BoldBlue.apply(operation + DEV_LOOP_BUILD_COMPLETED), elapsedSeconds);
+                log("%s (%.1f seconds)", BOLD_BLUE.apply(operation + DEV_LOOP_BUILD_COMPLETED), elapsedSeconds);
             }
         }
 
         @Override
         public long onBuildFail(int cycleNumber, BuildType type, Throwable error) {
             Log.info();
-            log("%s", BoldRed.apply(DEV_LOOP_BUILD_FAILED));
+            log("%s", BOLD_RED.apply(DEV_LOOP_BUILD_FAILED));
             ensureStop();
             String message;
             if (lastChangeType == ChangeType.BuildFile) {
@@ -178,7 +180,7 @@ public class DevLoop {
             } else {
                 message = "waiting for changes";
             }
-            log("%s", BoldYellow.apply(message));
+            log("%s", BOLD_YELLOW.apply(message));
             return BUILD_FAIL_DELAY;
         }
 
@@ -209,7 +211,7 @@ public class DevLoop {
         @Override
         public void onLoopFail(int cycleNumber, Throwable error) {
             Log.info();
-            log("%s %s", BoldRed.apply(DEV_LOOP_FAILED), error.getMessage());
+            log("%s %s", BOLD_RED.apply(DEV_LOOP_FAILED), error.getMessage());
         }
 
         @Override
@@ -233,11 +235,11 @@ public class DevLoop {
 
     private BuildLoop newLoop(BuildExecutor executor, boolean initialClean, boolean watchBinariesOnly) {
         return BuildLoop.builder()
-                .buildExecutor(executor)
-                .clean(initialClean)
-                .watchBinariesOnly(watchBinariesOnly)
-                .projectSupplier(projectSupplier)
-                .build();
+                        .buildExecutor(executor)
+                        .clean(initialClean)
+                        .watchBinariesOnly(watchBinariesOnly)
+                        .projectSupplier(projectSupplier)
+                        .build();
     }
 
     private void run(BuildLoop loop, int maxWaitSeconds) throws InterruptedException, TimeoutException {

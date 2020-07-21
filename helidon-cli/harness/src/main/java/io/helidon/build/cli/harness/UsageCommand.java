@@ -20,7 +20,8 @@ import java.util.Map;
 
 import io.helidon.build.util.Log;
 
-import static io.helidon.build.util.StyleFunction.Bold;
+import static io.helidon.build.util.Style.bold;
+
 
 /**
  * Built-in usage command.
@@ -54,7 +55,7 @@ final class UsageCommand extends CommandModel {
     }
 
     private void execute(CommandContext context) {
-        String styledName = Bold.apply(context.cli().name());
+        String styledName = bold().apply(context.cli().name());
         Log.info(String.format("%nUsage:\t%s [OPTIONS] COMMAND%n", styledName));
         Log.info(context.cli().description());
         Log.info("\nOptions:");

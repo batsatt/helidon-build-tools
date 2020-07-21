@@ -23,13 +23,15 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import static io.helidon.build.util.StyleFunction.Bold;
-import static io.helidon.build.util.StyleFunction.BoldBlue;
+import io.helidon.build.util.Style;
+
 
 /**
  * Class Prompter.
  */
 class Prompter {
+    private static final Style BOLD = Style.bold();
+    private static final Style BOLD_BLUE = Style.boldBlue();
 
     private Prompter() {
     }
@@ -40,11 +42,11 @@ class Prompter {
 
     static String prompt(String question, String defaultResponse) {
         try {
-            String def = BoldBlue.apply(defaultResponse);
+            String def = BOLD_BLUE.apply(defaultResponse);
             String q = defaultResponse != null
                     ? String.format("%s (Default: %s): ", question, def)
                     : String.format("%s: ", question);
-            System.out.print(Bold.apply(q));
+            System.out.print(BOLD.apply(q));
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             String response = reader.readLine();
             return response == null || response.length() == 0 ? defaultResponse : response.trim();
@@ -60,14 +62,14 @@ class Prompter {
     static int prompt(String question, String[] options, int defaultOption) {
         Objects.checkIndex(defaultOption, options.length);
         try {
-            System.out.println(Bold.apply(question));
+            System.out.println(BOLD.apply(question));
             for (int i = 0; i < options.length; i++) {
-                String o = BoldBlue.apply(String.format("  (%d) %s ", i + 1, options[i]));
+                String o = BOLD_BLUE.apply(String.format("  (%d) %s ", i + 1, options[i]));
                 System.out.println(o);
             }
-            String def = BoldBlue.apply(String.format("%d", defaultOption + 1));
+            String def = BOLD_BLUE.apply(String.format("%d", defaultOption + 1));
             String q = String.format("Enter selection (Default: %s): ", def);
-            System.out.print(Bold.apply(q));
+            System.out.print(BOLD.apply(q));
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             String response = reader.readLine();
             if (response == null || response.trim().length() == 0) {
@@ -87,9 +89,9 @@ class Prompter {
 
     static boolean promptYesNo(String question, boolean defaultOption) {
         try {
-            String def = BoldBlue.apply(defaultOption ? "y" : "n");
+            String def = BOLD_BLUE.apply(defaultOption ? "y" : "n");
             String q = String.format("%s (Default: %s): ", question, def);
-            System.out.print(Bold.apply(q));
+            System.out.print(BOLD.apply(q));
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             String response = reader.readLine();
             if (response == null || response.trim().length() == 0) {

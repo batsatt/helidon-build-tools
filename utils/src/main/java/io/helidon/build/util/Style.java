@@ -40,24 +40,77 @@ import static org.fusesource.jansi.Ansi.ansi;
  */
 @SuppressWarnings("StaticInitializerReferencesSubClass")
 public class Style {
-    private static final Style NONE = new Style();
-    private static final Style PLAIN = new Emphasis(Attribute.RESET);
-    private static final Style BOLD = new Emphasis(Attribute.INTENSITY_BOLD);
-    private static final Style ITALIC = new Emphasis(Attribute.ITALIC);
-    private static final Style FAINT = new Emphasis(Attribute.INTENSITY_FAINT);
-    private static final Style BOLD_ITALIC = new StyleList(BOLD).add(ITALIC);
-    private static final Style NEGATIVE = new Emphasis(Attribute.NEGATIVE_ON);
     private static final boolean ENABLED = AnsiConsoleInstaller.install();
-    private static final String ANSI_ESCAPE_BEGIN = "\033[";
+    private static final Style NONE = new Style();
+    private static final Style CORE_PLAIN = new Emphasis(Attribute.RESET);
+    private static final Style CORE_BOLD = new Emphasis(Attribute.INTENSITY_BOLD);
+    private static final Style CORE_ITALIC = new Emphasis(Attribute.ITALIC);
+    private static final Style CORE_FAINT = new Emphasis(Attribute.INTENSITY_FAINT);
+    private static final Style CORE_BOLD_ITALIC = new StyleList(CORE_BOLD).add(CORE_ITALIC);
+    private static final Style CORE_NEGATIVE = new Emphasis(Attribute.NEGATIVE_ON);
     private static final Map<String, Style> STYLES = stylesByName();
+    private static final String ANSI_ESCAPE_BEGIN = "\033[";
     private static final Lock STRIP_LOCK = new ReentrantReadWriteLock().writeLock();
     private static final ByteArrayOutputStream STRIP_BYTES = new ByteArrayOutputStream();
     private static final AnsiOutputStream STRIP = new AnsiOutputStream(STRIP_BYTES);
 
+    private static final Style PLAIN = Style.named("plain", true);
+    private static final Style BOLD = named("bold", true);
+    private static final Style ITALIC = named("italic", true);
+    private static final Style BOLD_ITALIC = named("ITALIC", true);
+
+    private static final Style RED = named("red", true);
+    private static final Style ITALIC_RED = named("_red_", true);
+    private static final Style BRIGHT_RED = named("red!", true);
+    private static final Style BOLD_RED = named("RED", true);
+    private static final Style BOLD_ITALIC_RED = named("_RED_", true);
+    private static final Style BOLD_BRIGHT_RED = named("RED!", true);
+    private static final Style BOLD_BRIGHT_ITALIC_RED = named("_RED_!", true);
+
+    private static final Style YELLOW = named("yellow", true);
+    private static final Style ITALIC_YELLOW = named("_yellow_", true);
+    private static final Style BRIGHT_YELLOW = named("yellow!", true);
+    private static final Style BOLD_YELLOW = named("YELLOW", true);
+    private static final Style BOLD_ITALIC_YELLOW = named("_YELLOW_", true);
+    private static final Style BOLD_BRIGHT_YELLOW = named("YELLOW!", true);
+    private static final Style BOLD_BRIGHT_ITALIC_YELLOW = named("_YELLOW_!", true);
+
+    private static final Style GREEN = named("green", true);
+    private static final Style ITALIC_GREEN = named("_green_", true);
+    private static final Style BRIGHT_GREEN = named("green!", true);
+    private static final Style BOLD_GREEN = named("GREEN", true);
+    private static final Style BOLD_ITALIC_GREEN = named("_GREEN_", true);
+    private static final Style BOLD_BRIGHT_GREEN = named("GREEN!", true);
+    private static final Style BOLD_BRIGHT_ITALIC_GREEN = named("_GREEN_!", true);
+
+    private static final Style CYAN = named("cyan", true);
+    private static final Style ITALIC_CYAN = named("_cyan_", true);
+    private static final Style BRIGHT_CYAN = named("cyan!", true);
+    private static final Style BOLD_CYAN = named("CYAN", true);
+    private static final Style BOLD_ITALIC_CYAN = named("_CYAN_", true);
+    private static final Style BOLD_BRIGHT_CYAN = named("CYAN!", true);
+    private static final Style BOLD_BRIGHT_ITALIC_CYAN = named("_CYAN_!", true);
+
+    private static final Style BLUE = named("blue", true);
+    private static final Style ITALIC_BLUE = named("_blue_", true);
+    private static final Style BRIGHT_BLUE = named("blue!", true);
+    private static final Style BOLD_BLUE = named("BLUE", true);
+    private static final Style BOLD_ITALIC_BLUE = named("_BLUE_", true);
+    private static final Style BOLD_BRIGHT_BLUE = named("BLUE!", true);
+    private static final Style BOLD_BRIGHT_ITALIC_BLUE = named("_BLUE_!", true);
+
+    private static final Style MAGENTA = named("magenta", true);
+    private static final Style ITALIC_MAGENTA = named("_magenta_", true);
+    private static final Style BRIGHT_MAGENTA = named("magenta!", true);
+    private static final Style BOLD_MAGENTA = named("MAGENTA", true);
+    private static final Style BOLD_ITALIC_MAGENTA = named("_MAGENTA_", true);
+    private static final Style BOLD_BRIGHT_MAGENTA = named("MAGENTA!", true);
+    private static final Style BOLD_BRIGHT_ITALIC_MAGENTA = named("_MAGENTA_!", true);
+
     /**
      * Return all styles, by name.
      *
-     * @return The styles. Not immutable, so may be (carefully!) modified.
+     * @return The styles. Not immutable, so may be modified.
      */
     public static Map<String, Style> styles() {
         return STYLES;
@@ -70,6 +123,420 @@ public class Style {
      */
     public static Style none() {
         return NONE;
+    }
+
+    /**
+     * Returns the plain style.
+     *
+     * @return The style.
+     */
+    public static Style plain() {
+        return PLAIN;
+    }
+
+    /**
+     * Returns the bold style.
+     *
+     * @return The style.
+     */
+    public static Style bold() {
+        return BOLD;
+    }
+
+    /**
+     * Returns the italic style.
+     *
+     * @return The style.
+     */
+    public static Style italic() {
+        return ITALIC;
+    }
+
+    /**
+     * Returns the bold, italic style.
+     *
+     * @return The style.
+     */
+    public static Style boldItalic() {
+        return BOLD_ITALIC;
+    }
+
+    /**
+     * Returns the red style.
+     *
+     * @return The style.
+     */
+    public static Style red() {
+        return RED;
+    }
+
+    /**
+     * Returns the italic red style.
+     *
+     * @return The style.
+     */
+    public static Style italicRed() {
+        return ITALIC_RED;
+    }
+
+    /**
+     * Returns the bright red style.
+     *
+     * @return The style.
+     */
+    public static Style brightRed() {
+        return BRIGHT_RED;
+    }
+
+    /**
+     * Returns the bold red style.
+     *
+     * @return The style.
+     */
+    public static Style boldRed() {
+        return BOLD_RED;
+    }
+
+    /**
+     * Returns the bold, italic red style.
+     *
+     * @return The style.
+     */
+    public static Style boldItalicRed() {
+        return BOLD_ITALIC_RED;
+    }
+
+    /**
+     * Returns the bold, bright red style.
+     *
+     * @return The style.
+     */
+    public static Style boldBrightRed() {
+        return BOLD_BRIGHT_RED;
+    }
+
+    /**
+     * Returns the bold, bright, italic red style.
+     *
+     * @return The style.
+     */
+    public static Style boldBrightItalicRed() {
+        return BOLD_BRIGHT_ITALIC_RED;
+    }
+
+    /**
+     * Returns the yellow style.
+     *
+     * @return The style.
+     */
+    public static Style yellow() {
+        return YELLOW;
+    }
+
+    /**
+     * Returns the italic yellow style.
+     *
+     * @return The style.
+     */
+    public static Style italicYellow() {
+        return ITALIC_YELLOW;
+    }
+
+    /**
+     * Returns the bright yellow style.
+     *
+     * @return The style.
+     */
+    public static Style brightYellow() {
+        return BRIGHT_YELLOW;
+    }
+
+    /**
+     * Returns the bold yellow style.
+     *
+     * @return The style.
+     */
+    public static Style boldYellow() {
+        return BOLD_YELLOW;
+    }
+
+    /**
+     * Returns the bold, italic yellow style.
+     *
+     * @return The style.
+     */
+    public static Style boldItalicYellow() {
+        return BOLD_ITALIC_YELLOW;
+    }
+
+    /**
+     * Returns the bold, bright yellow style.
+     *
+     * @return The style.
+     */
+    public static Style boldBrightYellow() {
+        return BOLD_BRIGHT_YELLOW;
+    }
+
+    /**
+     * Returns the bold, bright, italic yellow style.
+     *
+     * @return The style.
+     */
+    public static Style boldBrightItalicYellow() {
+        return BOLD_BRIGHT_ITALIC_YELLOW;
+    }
+
+    /**
+     * Returns the green style.
+     *
+     * @return The style.
+     */
+    public static Style green() {
+        return GREEN;
+    }
+
+    /**
+     * Returns the italic green style.
+     *
+     * @return The style.
+     */
+    public static Style italicGreen() {
+        return ITALIC_GREEN;
+    }
+
+    /**
+     * Returns the bright green style.
+     *
+     * @return The style.
+     */
+    public static Style brightGreen() {
+        return BRIGHT_GREEN;
+    }
+
+    /**
+     * Returns the bold green style.
+     *
+     * @return The style.
+     */
+    public static Style boldGreen() {
+        return BOLD_GREEN;
+    }
+
+    /**
+     * Returns the bold, italic green style.
+     *
+     * @return The style.
+     */
+    public static Style boldItalicGreen() {
+        return BOLD_ITALIC_GREEN;
+    }
+
+    /**
+     * Returns the bold, bright green style.
+     *
+     * @return The style.
+     */
+    public static Style boldBrightGreen() {
+        return BOLD_BRIGHT_GREEN;
+    }
+
+    /**
+     * Returns the bold, bright, italic green style.
+     *
+     * @return The style.
+     */
+    public static Style boldBrightItalicGreen() {
+        return BOLD_BRIGHT_ITALIC_GREEN;
+    }
+
+    /**
+     * Returns the cyan style.
+     *
+     * @return The style.
+     */
+    public static Style cyan() {
+        return CYAN;
+    }
+
+    /**
+     * Returns the italic cyan style.
+     *
+     * @return The style.
+     */
+    public static Style italicCyan() {
+        return ITALIC_CYAN;
+    }
+
+    /**
+     * Returns the bright cyan style.
+     *
+     * @return The style.
+     */
+    public static Style brightCyan() {
+        return BRIGHT_CYAN;
+    }
+
+    /**
+     * Returns the bold cyan style.
+     *
+     * @return The style.
+     */
+    public static Style boldCyan() {
+        return BOLD_CYAN;
+    }
+
+    /**
+     * Returns the bold, italic cyan style.
+     *
+     * @return The style.
+     */
+    public static Style boldItalicCyan() {
+        return BOLD_ITALIC_CYAN;
+    }
+
+    /**
+     * Returns the bold, bright cyan style.
+     *
+     * @return The style.
+     */
+    public static Style boldBrightCyan() {
+        return BOLD_BRIGHT_CYAN;
+    }
+
+    /**
+     * Returns the bold, bright, italic cyan style.
+     *
+     * @return The style.
+     */
+    public static Style boldBrightItalicCyan() {
+        return BOLD_BRIGHT_ITALIC_CYAN;
+    }
+
+    /**
+     * Returns the blue style.
+     *
+     * @return The style.
+     */
+    public static Style blue() {
+        return BLUE;
+    }
+
+    /**
+     * Returns the italic blue style.
+     *
+     * @return The style.
+     */
+    public static Style italicBlue() {
+        return ITALIC_BLUE;
+    }
+
+    /**
+     * Returns the bright blue style.
+     *
+     * @return The style.
+     */
+    public static Style brightBlue() {
+        return BRIGHT_BLUE;
+    }
+
+    /**
+     * Returns the bold blue style.
+     *
+     * @return The style.
+     */
+    public static Style boldBlue() {
+        return BOLD_BLUE;
+    }
+
+    /**
+     * Returns the bold, italic blue style.
+     *
+     * @return The style.
+     */
+    public static Style boldItalicBlue() {
+        return BOLD_ITALIC_BLUE;
+    }
+
+    /**
+     * Returns the bold, bright blue style.
+     *
+     * @return The style.
+     */
+    public static Style boldBrightBlue() {
+        return BOLD_BRIGHT_BLUE;
+    }
+
+    /**
+     * Returns the bold, bright, italic blue style.
+     *
+     * @return The style.
+     */
+    public static Style boldBrightItalicBlue() {
+        return BOLD_BRIGHT_ITALIC_BLUE;
+    }
+
+    /**
+     * Returns the magenta style.
+     *
+     * @return The style.
+     */
+    public static Style magenta() {
+        return MAGENTA;
+    }
+
+    /**
+     * Returns the italic magenta style.
+     *
+     * @return The style.
+     */
+    public static Style italicMagenta() {
+        return ITALIC_MAGENTA;
+    }
+
+    /**
+     * Returns the bright magenta style.
+     *
+     * @return The style.
+     */
+    public static Style brightMagenta() {
+        return BRIGHT_MAGENTA;
+    }
+
+    /**
+     * Returns the bold magenta style.
+     *
+     * @return The style.
+     */
+    public static Style boldMagenta() {
+        return BOLD_MAGENTA;
+    }
+
+    /**
+     * Returns the bold, italic magenta style.
+     *
+     * @return The style.
+     */
+    public static Style boldItalicMagenta() {
+        return BOLD_ITALIC_MAGENTA;
+    }
+
+    /**
+     * Returns the bold, bright magenta style.
+     *
+     * @return The style.
+     */
+    public static Style boldBrightMagenta() {
+        return BOLD_BRIGHT_MAGENTA;
+    }
+
+    /**
+     * Returns the bold, bright, italic magenta style.
+     *
+     * @return The style.
+     */
+    public static Style boldBrightItalicMagenta() {
+        return BOLD_BRIGHT_ITALIC_MAGENTA;
     }
 
     /**
@@ -364,38 +831,15 @@ public class Style {
         logTable(backgroundColorNames(), true);
     }
 
-    private static void logTable(List<String> names, boolean background) {
-        String header = background ? "Background Color" : "Text Color";
-        String example = " Example 1234 !@#$% ";
-        String rowFormat = "│ %-19s│ %22s │ %22s │ %22s │ %22s │";
-        Log.info("┌────────────────────┬──────────────────────┬──────────────────────┬──────────────────────┬───────────"
-                 + "───────────┐");
-        Log.info("│ %-19s│        Plain         │        Italic        │         Bold         │    Italic & Bold     │",
-                 header);
-        Log.info("├────────────────────┼──────────────────────┼──────────────────────┼──────────────────────┼───────────"
-                 + "───────────┤");
-        names.forEach(name -> {
-            String textColor = background ? "default" : name;
-            String backgroundColor = background ? name : "bg_default";
-
-            String textColorBright = background ? textColor : textColor + "!";
-            String backgroundColorBright = background ? backgroundColor + "!" : backgroundColor;
-
-            String plain = Style.of(backgroundColor, textColor).apply(example);
-            String italic = Style.of(backgroundColor, textColor, "italic").apply(example);
-            String bold = Style.of(backgroundColor, textColor, "bold").apply(example);
-            String italicBold = Style.of(backgroundColor, textColor, "ITALIC").apply(example);
-
-            String plainBright = Style.of(backgroundColorBright, textColorBright).apply(example);
-            String italicBright = Style.of(backgroundColorBright, textColorBright, "italic").apply(example);
-            String boldBright = Style.of(backgroundColorBright, textColorBright, "bold").apply(example);
-            String italicBoldBright = Style.of(backgroundColorBright, textColorBright, "ITALIC").apply(example);
-
-            Log.info(rowFormat, name, plain, italic, bold, italicBold);
-            Log.info(rowFormat, name + "!", plainBright, italicBright, boldBright, italicBoldBright);
-        });
-        Log.info("└────────────────────┴──────────────────────┴──────────────────────┴──────────────────────┴────────────"
-                 + "──────────┘");
+    /**
+     * Returns the message in this style.
+     *
+     * @param format The message format.
+     * @param args The message arguments.
+     * @return The message.
+     */
+    public String format(String format, Object... args) {
+        return apply(String.format(format, args));
     }
 
     /**
@@ -433,71 +877,39 @@ public class Style {
         return "none";
     }
 
-    static class StyleList extends Style {
-        private final List<Style> styles = new ArrayList<>();
 
-        StyleList(String... names) {
-            for (String name : names) {
-                add(name);
-            }
-        }
+    private static void logTable(List<String> names, boolean background) {
+        String header = background ? "Background Color" : "Text Color";
+        String example = " Example 1234 !@#$% ";
+        String rowFormat = "│ %-19s│ %22s │ %22s │ %22s │ %22s │";
+        Log.info("┌────────────────────┬──────────────────────┬──────────────────────┬──────────────────────┬───────────"
+                 + "───────────┐");
+        Log.info("│ %-19s│        Plain         │        Italic        │         Bold         │    Italic & Bold     │",
+                 header);
+        Log.info("├────────────────────┼──────────────────────┼──────────────────────┼──────────────────────┼───────────"
+                 + "───────────┤");
+        names.forEach(name -> {
+            String textColor = background ? "default" : name;
+            String backgroundColor = background ? name : "bg_default";
 
-        StyleList(Attribute... attributes) {
-            for (Attribute attribute : attributes) {
-                add(attribute);
-            }
-        }
+            String textColorBright = background ? textColor : textColor + "!";
+            String backgroundColorBright = background ? backgroundColor + "!" : backgroundColor;
 
-        StyleList(Style... styles) {
-            for (Style style : styles) {
-                add(style);
-            }
-        }
+            String plain = Style.of(backgroundColor, textColor).apply(example);
+            String italic = Style.of(backgroundColor, textColor, "italic").apply(example);
+            String bold = Style.of(backgroundColor, textColor, "bold").apply(example);
+            String italicBold = Style.of(backgroundColor, textColor, "ITALIC").apply(example);
 
-        StyleList add(String name) {
-            add(Style.named(name));
-            return this;
-        }
+            String plainBright = Style.of(backgroundColorBright, textColorBright).apply(example);
+            String italicBright = Style.of(backgroundColorBright, textColorBright, "italic").apply(example);
+            String boldBright = Style.of(backgroundColorBright, textColorBright, "bold").apply(example);
+            String italicBoldBright = Style.of(backgroundColorBright, textColorBright, "ITALIC").apply(example);
 
-        StyleList add(Attribute attribute) {
-            add(new Emphasis(attribute));
-            return this;
-        }
-
-        StyleList add(Style style) {
-            styles.add(style);
-            return this;
-        }
-
-        int size() {
-            return styles.size();
-        }
-
-        Style pop() {
-            if (styles.isEmpty()) {
-                return none();
-            } else {
-                return styles.remove(size() - 1);
-            }
-        }
-
-        @Override
-        public Ansi apply(Ansi ansi) {
-            for (Style style : styles) {
-                style.apply(ansi);
-            }
-            return ansi;
-        }
-
-        @Override
-        public Ansi reset(Ansi ansi) {
-            return ansi.reset();
-        }
-
-        @Override
-        public String toString() {
-            return styles.toString();
-        }
+            Log.info(rowFormat, name, plain, italic, bold, italicBold);
+            Log.info(rowFormat, name + "!", plainBright, italicBright, boldBright, italicBoldBright);
+        });
+        Log.info("└────────────────────┴──────────────────────┴──────────────────────┴──────────────────────┴────────────"
+                 + "──────────┘");
     }
 
     static class Hue extends Style {
@@ -568,6 +980,73 @@ public class Style {
         }
     }
 
+    static class StyleList extends Style {
+        private final List<Style> styles = new ArrayList<>();
+
+        StyleList(String... names) {
+            for (String name : names) {
+                add(name);
+            }
+        }
+
+        StyleList(Attribute... attributes) {
+            for (Attribute attribute : attributes) {
+                add(attribute);
+            }
+        }
+
+        StyleList(Style... styles) {
+            for (Style style : styles) {
+                add(style);
+            }
+        }
+
+        StyleList add(String name) {
+            add(Style.named(name));
+            return this;
+        }
+
+        StyleList add(Attribute attribute) {
+            add(new Emphasis(attribute));
+            return this;
+        }
+
+        StyleList add(Style style) {
+            styles.add(style);
+            return this;
+        }
+
+        int size() {
+            return styles.size();
+        }
+
+        Style pop() {
+            if (styles.isEmpty()) {
+                return none();
+            } else {
+                return styles.remove(size() - 1);
+            }
+        }
+
+        @Override
+        public Ansi apply(Ansi ansi) {
+            for (Style style : styles) {
+                style.apply(ansi);
+            }
+            return ansi;
+        }
+
+        @Override
+        public Ansi reset(Ansi ansi) {
+            return ansi.reset();
+        }
+
+        @Override
+        public String toString() {
+            return styles.toString();
+        }
+    }
+
     private static Map<String, Style> stylesByName() {
         final Map<String, Style> styles = new LinkedHashMap<>();
 
@@ -585,14 +1064,14 @@ public class Style {
             final boolean negative = lowerName.equals("negative");
             final String upperName = lowerName.toUpperCase(Locale.ENGLISH);
             final Color color = negative ? null : Color.valueOf(upperName);
-            final Style basic = negative ? NEGATIVE : Style.of(color, false, false);
-            final Style bright = negative ? NEGATIVE : Style.of(color, false, true);
-            final Style bold = Style.of(BOLD, basic);
-            final Style italic = Style.of(ITALIC, basic);
-            final Style italicBold = Style.of(BOLD_ITALIC, basic);
-            final Style boldBright = Style.of(BOLD, bright);
-            final Style italicBright = Style.of(bright, ITALIC);
-            final Style italicBoldBright = Style.of(BOLD, ITALIC, bright);
+            final Style basic = negative ? CORE_NEGATIVE : Style.of(color, false, false);
+            final Style bright = negative ? CORE_NEGATIVE : Style.of(color, false, true);
+            final Style bold = Style.of(CORE_BOLD, basic);
+            final Style italic = Style.of(CORE_ITALIC, basic);
+            final Style italicBold = Style.of(CORE_BOLD_ITALIC, basic);
+            final Style boldBright = Style.of(CORE_BOLD, bright);
+            final Style italicBright = Style.of(bright, CORE_ITALIC);
+            final Style italicBoldBright = Style.of(CORE_BOLD, CORE_ITALIC, bright);
 
             styles.put(lowerName, basic);
 
@@ -624,27 +1103,27 @@ public class Style {
 
             // Background colors
 
-            styles.put("bg_" + lowerName, negative ? NEGATIVE : Style.of(color, true, false));
-            styles.put("bg_" + lowerName + "!", negative ? NEGATIVE : Style.of(color, true, true));
+            styles.put("bg_" + lowerName, negative ? CORE_NEGATIVE : Style.of(color, true, false));
+            styles.put("bg_" + lowerName + "!", negative ? CORE_NEGATIVE : Style.of(color, true, true));
         });
 
         // Emphasis and aliases
 
-        styles.put("bold", BOLD);
-        styles.put("BOLD", BOLD);
+        styles.put("bold", CORE_BOLD);
+        styles.put("BOLD", CORE_BOLD);
 
-        styles.put("italic", ITALIC);
+        styles.put("italic", CORE_ITALIC);
 
-        styles.put("*bold*", BOLD_ITALIC);
-        styles.put("_bold_", BOLD_ITALIC);
-        styles.put("*BOLD*", BOLD_ITALIC);
-        styles.put("_BOLD_", BOLD_ITALIC);
-        styles.put("**italic**", BOLD_ITALIC);
-        styles.put("__italic__", BOLD_ITALIC);
-        styles.put("ITALIC", BOLD_ITALIC);
+        styles.put("*bold*", CORE_BOLD_ITALIC);
+        styles.put("_bold_", CORE_BOLD_ITALIC);
+        styles.put("*BOLD*", CORE_BOLD_ITALIC);
+        styles.put("_BOLD_", CORE_BOLD_ITALIC);
+        styles.put("**italic**", CORE_BOLD_ITALIC);
+        styles.put("__italic__", CORE_BOLD_ITALIC);
+        styles.put("ITALIC", CORE_BOLD_ITALIC);
 
-        styles.put("plain", PLAIN);
-        styles.put("faint", FAINT);
+        styles.put("plain", CORE_PLAIN);
+        styles.put("faint", CORE_FAINT);
         styles.put("underline", Style.of(Attribute.UNDERLINE));
         styles.put("strikethrough", Style.of(Attribute.STRIKETHROUGH_ON));
         styles.put("blink", Style.of(Attribute.BLINK_SLOW));
