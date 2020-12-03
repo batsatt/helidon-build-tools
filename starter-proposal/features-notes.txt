@@ -1,0 +1,52 @@
+
+11/20/20 Meeting Notes
+----------------------
+
+Borrow from Micronaut
+
+- diffs rather than add: we should not modify user's code, they should but with our help
+- REST service, so e.g. JetBrains can make IDE plugin
+- include feature specific links in generated README
+- context dependent commands in CLI? Probably not, since it makes less sense in our model:
+    - build without --project doesn't make sense if current dir is not a project, but... with --project it does
+    - feature-diff also requires project
+
+
+Write User Stories
+
+Laird's Spring Boot case
+    a. Create project
+       - using the web
+       - using an IDE
+       - using the CLI
+    b. Update project
+       - info that helps (e.g. diff, diff with comments?, applying the diff, links to docs).
+
+Goals
+
+    a. User acquisition/onboarding: help noobs get started and then take incremental steps forward
+        https://en.wikipedia.org/wiki/User_onboarding
+        https://www.toptal.com/designers/product-design/guide-to-onboarding-ux
+    b. Focus on user experience
+    c. Simplify complex choices: coarse grained features with options, progressive disclosure where possible
+    d. High quality fully functional output
+    e. High fidelity with Helidon version: metadata both hand maintained and generated (e.g. dependencies) in helidon project
+    f. Enable third-party tooling (e.g. JetBrains. Is there any support for "feature-add" like behavior?)
+
+
+Tech
+    https://linuxcommand.org/lc3_adv_dialog.php
+    maybe need to use JavaFX?
+
+
+
+
+11/23/20
+Dmitry / Tomas Question
+
+Subject:
+Body:
+
+
+
+
