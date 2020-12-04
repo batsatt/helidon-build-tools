@@ -74,7 +74,6 @@ admittedly poor substitute, we can follow the Micronaut `feature diff` model and
 
 ## General Requirements
 
-
 ## Deliverables
 
 #### New Archetype Data Model
