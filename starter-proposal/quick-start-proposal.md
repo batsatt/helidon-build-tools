@@ -54,6 +54,7 @@ the merge would succeed and then apply it if so, all under some new flag.)
 
 ## Stretch Goals
  
+1. Provide some single-click quick start variants, e.g. `Hello World SE`, `Hello World MP`, etc. 
 1. Provide a quick start experience tailored for users with different backgrounds, e.g. Spring Boot, Java EE, Helidon expert, etc.
 
 
