@@ -17,20 +17,22 @@ data model as some metadata plus one or more of the following:
 1. Java source file fragments, e.g. Main.java
 1. Complete source files 
 
-Relationships _across_ features must also be modelled, e.g.
+Relationships _across_ features must also be modelled somehow, e.g.
  
 1. `A allows B..M`
 1. `D requires E`
 1. `C and F implies G`
 1. `X precedes Y`
 
-In addition to producing and maintaining this data, the use of it implies **_merging_**. At project creation, a base archetype 
-must be merged with feature content, and the result must be both functional and properly formatted. A previously created project 
-must be merged to add or remove features. 
+In addition to producing and maintaining this data, the use of it implies some form of _merge_. At project creation, a base 
+archetype must be merged with feature content, and the result must be both functional and properly formatted. A good templating
+mechanism should be sufficient for this (perhaps with some post-processing to format), but to add or remove features from
+a previously created project requires an actual merge. 
 
-These are significant requirements when the content is entirely under our control; however, when a user has modified a project 
-and wants to add or remove features it becomes a science project. We abandoned the first attempt at supporting features because 
-of the latter realization; solving it moving forward requires some simplifying assumptions.  
+These are significant requirements when the content is entirely under our control; however, when a user has modified the source 
+and wants to add or remove features the correctness requirement becomes an extremely high bar, far more of a research project. We 
+deferred the [first attempt at supporting features](https://github.com/tomas-langer/helidon/blob/e47f1fe27c75d6fe2120fffdd4d97a166e5c8e99/docs-internal/features/features.md)
+because of the latter realization; solving the update problem requires some simplifying assumptions.  
 
 Further, the scope of this project has been expanded in light of the recognition that we must focus on providing an excellent
 "quick start" experience for new users. The important additions are:
