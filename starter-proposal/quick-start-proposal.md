@@ -34,58 +34,79 @@ and wants to add or remove features the correctness requirement becomes an extre
 deferred the [first attempt at supporting features](https://github.com/tomas-langer/helidon/blob/e47f1fe27c75d6fe2120fffdd4d97a166e5c8e99/docs-internal/features/features.md)
 because of the latter realization; solving the update problem requires some simplifying assumptions.  
 
-Further, the scope of this project has been expanded in light of the recognition that we must focus on providing an excellent
-"quick start" experience for new users. The important additions are:
+Further, the scope of this project has been expanded in light of the recognition that we must augment our current documentation
+only Quickstart experience with a simpler and more interactive one for new users. The important additions are:
 
-1. A Web UI, both to streamline the process (avoids download/install CLI requirement) and to leverage the richer format.
-1. A REST service, both for the Web UI and to enable third party (e.g. IDEs) UIs.   
+1. A web UI that guides creation and initial use of a new project, 
+1. A REST service, both for the web UI and to enable third party (e.g. IDEs) UIs.   
+       
 
 ## Non Goals
 
 Given the high likelihood of introducing errors, direct modification of an existing project will not be supported. As an
-admittedly poor substitute, we can follow the Micronaut `feature diff` model and rely on knowledgeable users to apply and merge.
-(Note that in the CLI we _may_ be able to do better if the project is a git repo, since we can run `git apply --check` to see if
-the merge would succeed and then apply it if so, all under some new flag.)
+admittedly poor substitute, we can (eventually) follow the Micronaut `feature diff` model and rely on knowledgeable users to 
+apply and merge. (Note that in the CLI we _may_ be able to do better if the project is a git repo, since we can run 
+`git apply --check` to see if the merge would succeed and then apply it if so, all under some new flag.)
 
 ## Goals
 
-1. Ensure that a potential user can search the web and get started with a couple of clicks.
-1. Provide a quick start experience on helidon.io that is _guided_ and constrained, exposing complexity only if needed.
-1. Expose the data model via a service so that IDE vendors can add project creation support.
-1. Ensure that the CLI `init` command matches the web quick-start as much as is reasonable.
+1. Ensure that a potential user can search the web and try out Helidon with a minimum of steps.
+1. Enhance our "Getting Started" page with a _guided_ experience ("wizard") that provides help and exposes complexity only as needed.
+1. Provide single-click "Hello World" shortcuts in the wizard for SE and MP.    
+1. Expose the archetype data model via a service so that IDE vendors can use to add project creation support.
+1. Ensure that the CLI `init` command matches the wizard as much as is reasonable.
 
 ## Stretch Goals
  
-1. Provide some single-click quick start variants, e.g. `Hello World SE`, `Hello World MP`, etc. 
-1. Provide a quick start experience tailored for users with different backgrounds, e.g. Spring Boot, Java EE, Helidon expert, etc.
+1. Provide wizard pathways tailored for users with different backgrounds, e.g. Spring Boot, Java EE, Helidon expert, etc.
 
 
-## High Level User Stories
+## User Stories
 
-1. As a developer who has heard of Helidon, I want to easily find a Quick Start page on the web so I can try it out without reading a lot of docs.
-1. As a developer who has found the Quick Start page, I don’t want to be told I need anything more than a JDK to try it since I’m not sure I want to use Helidon. 
-1. As a first time Quick Start user, I need clear, helpful guidance through the choices so I’m not overwhelmed by things I don’t understand yet.
-1. As a Quick Start user, I want to be able to easily navigate back to earlier choices so I can change my mind.
-1. As a Quick Start user, I need to be confident that selecting among all of the choices presented to me will result in a working project.
-1. As a Quick Start user, I want very simple instructions on how to build, run and use the created project so I don’t have to learn anything else.
-1. As a Spring Boot developer, I want Quick Start to help me try out comparable features so I can understand how to migrate and get started.
-1. As a Java EE developer, I want Quick Start to help me try out comparable features so I can understand how to migrate and get started.
-1. As an experienced Quick Start user, I want to turn off the extra help information so I can create a new project with the features I want very quickly.
-1. As a Quick Start user, I want the created project README to contain links for further reading when I’m ready so I don’t have to hunt it down myself.
-1. As a Quick Start user, I want to see the rendered README once the project is generated, so I don’t have to read markup.
+1. As a developer who has only heard of Helidon, I want to easily find a page on the web so I can try it out without reading a lot of docs.
+1. As a developer who has found the wizard, I don’t want to be told I need anything more than a JDK to try it since I’m not sure I want to use Helidon. 
+1. As a first time wizard user, I need clear, helpful guidance through the choices so I’m not overwhelmed by things I don’t understand yet.
+1. As a wizard user, I want to be able to easily navigate back to earlier choices so I can change my mind.
+1. As a wizard user, I need to be confident that selecting among all of the choices presented to me will result in a working project.
+1. As a wizard user, I want very simple instructions on how to build, run and use the created project so I don’t have to learn anything else.
+1. As a Spring Boot developer, I want the wizard to help me try out comparable features so I can understand how to migrate and get started.
+1. As a Java EE developer, I want the wizard to help me try out comparable features so I can understand how to migrate and get started.
+1. As an experienced wizard user, I want to turn off the extra help information so I can create a new project with the features I want very quickly.
+1. As a wizard user, I want the created project README to contain links for further reading when I’m ready so I don’t have to hunt it down myself.
+1. As a wizard user, I want to see the rendered README once the project is generated, so I don’t have to read markup.
 1. As a developer who has never used Maven, I want the created project README to have some basic help on getting started using it so I don’t have to learn that too.
 1. As a new Helidon user, I want the created project README to provide information on installing and using the CLI.
-1. As a Helidon CLI user, I want the init command experience to be as close to the Quick Start web experience as possible so it is familiar.
+1. As a Helidon CLI user, I want the `init` command experience to be as close to the web wizard experience as possible so it is familiar.
 1. As an IDE developer, I want an easily understood REST service for creating new Helidon projects so that I can provide a great user experience.
 
-## Detailed User Stories
+See also: [Laird's doc](https://docs.google.com/document/d/1G4IEycA9PDkodNI1d3-Zuj5WoA4oiIn2vKqwt7XAvIo/edit#heading=h.ui9koosmi9gl)
+           
+## User Experience
+                
+The helidon.io landing page has a big "Try Me" button (replacing the "Getting Started" link); clicking this button starts the
+wizard.
 
-[Laird's doc](https://docs.google.com/document/d/1G4IEycA9PDkodNI1d3-Zuj5WoA4oiIn2vKqwt7XAvIo/edit#heading=h.ui9koosmi9gl)
+The wizard is composed of steps, each of which contains one or more related choices along with information to help choose and
+simple navigation to go back to a previous step or cancel. See [here](https://vuetifyjs.com/en/components/steppers/) for an 
+example "stepper" UI component. Steps are nodes in a graph which is hand optimized to reach termination quickly. Termination
+results in the following user experience:
 
+1. A zip file download is started.
+2. The embedded README is rendered, containing further instructions and documentation.
 
-## General Requirements
+The first step selects SE or MP, with both code and overview bullet points like the current "Getting Started" page.
 
-TODO
+The next step selects either among predefined apps such as `Hello World` or further customization. If a predefined app is 
+selected the wizard terminates as describe above, otherwise...
+
+Further customization steps selects among the available SE or MP application types, then among the features applicable to the
+selected type.
+
+Some features require selection of a single implementation among the available choices, some may require one or more related
+components to be selected. Some combinations of features may require automatic inclusion of "hidden features" (e.g. for 
+integration modules such as `helidon-tracing-jersey`).
+              
+Docker and Kubernetes support would be modeled and exposed as features.
 
 ## Deliverables
 
