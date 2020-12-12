@@ -37,7 +37,7 @@ because of the latter realization; solving the update problem requires some simp
 Further, the scope of this project has been expanded in light of the recognition that we must augment our current documentation
 only Quickstart experience with a simpler and more interactive one for new users. The important additions are:
 
-1. A web UI that guides creation and initial use of a new project, 
+1. A web UI that guides creation and initial use of a new project. 
 1. A REST service, both for the web UI and to enable third party (e.g. IDEs) UIs.   
        
 
