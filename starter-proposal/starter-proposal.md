@@ -52,7 +52,7 @@ apply and merge. (Note that in the CLI we _may_ be able to do better if the proj
 
 1. Ensure that a potential user can search the web and try out Helidon with a minimum of steps.
 1. Enhance our "Getting Started" page with a _guided_ experience ("wizard") that provides help and exposes complexity only as needed.
-1. Provide single-click "Hello World" shortcuts in the wizard for SE and MP.    
+1. Provide single-click shortcuts (e.g. "Hello World") in the wizard for common cases.    
 1. Expose the archetype data model via a service so that IDE vendors can use to add project creation support.
 1. Ensure that the CLI `init` command matches the wizard as much as is reasonable.
 
@@ -79,7 +79,9 @@ apply and merge. (Note that in the CLI we _may_ be able to do better if the proj
 1. As a Helidon CLI user, I want the `init` command experience to be as close to the web wizard experience as possible so it is familiar.
 1. As an IDE developer, I want an easily understood REST service for creating new Helidon projects so that I can provide a great user experience.
 
-See also: [Laird's doc](https://docs.google.com/document/d/1G4IEycA9PDkodNI1d3-Zuj5WoA4oiIn2vKqwt7XAvIo/edit#heading=h.ui9koosmi9gl)
+See [Laird's doc](https://docs.google.com/document/d/1G4IEycA9PDkodNI1d3-Zuj5WoA4oiIn2vKqwt7XAvIo/edit#heading=h.ui9koosmi9gl) for
+a deeper set of user stories and goals, plus related thoughts.
+
            
 ## User Experience
                 
@@ -96,8 +98,8 @@ results in the following user experience:
 
 The first step selects SE or MP, with both code and overview bullet points like the current "Getting Started" page.
 
-The next step selects either among predefined apps such as `Hello World` or further customization. If a predefined app is 
-selected the wizard terminates as describe above, otherwise...
+The next step selects either among a set of predefined apps (e.g. `Hello World`, `JPA with Hibernate & UCP`, etc.) or further 
+customization. If a predefined app is selected the wizard terminates as describe above, otherwise...
 
 Further customization steps selects among the available SE or MP application types, then among the features applicable to the
 selected type.
