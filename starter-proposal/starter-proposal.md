@@ -80,7 +80,7 @@ apply and merge. (Note that in the CLI we _may_ be able to do better if the proj
 1. As an IDE developer, I want an easily understood REST service for creating new Helidon projects so that I can provide a great user experience.
 
 See [Laird's doc](https://docs.google.com/document/d/1G4IEycA9PDkodNI1d3-Zuj5WoA4oiIn2vKqwt7XAvIo/edit#heading=h.ui9koosmi9gl) for
-a deeper set of user stories and goals, plus related thoughts.
+a deeper set of user stories and goals.
 
            
 ## User Experience
