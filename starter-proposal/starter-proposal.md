@@ -88,7 +88,7 @@ wizard.
 
 The wizard is composed of steps, each of which contains one or more related choices along with information to help choose and
 simple navigation to go back to a previous step or cancel. See [here](https://vuetifyjs.com/en/components/steppers/) for an 
-example "stepper" UI component. Steps are nodes in a graph which is hand optimized to reach termination quickly. Termination
+example "stepper" UI component. Steps are nodes in a graph which is optimized to reach termination quickly. Termination
 results in the following user experience:
 
 1. A zip file download is started.
