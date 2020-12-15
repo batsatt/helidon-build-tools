@@ -30,7 +30,7 @@ mechanism should be sufficient for this (perhaps with some post-processing to fo
 a previously created project requires an actual merge. 
 
 These are significant requirements when the content is entirely under our control; however, when a user has modified the source 
-and wants to add or remove features the correctness requirement becomes an extremely high bar, far more of a research project. We 
+and wants to add or remove features the correctness requirement becomes an extremely high bar, far more of a science project. We 
 deferred the [first attempt at supporting features](https://github.com/tomas-langer/helidon/blob/e47f1fe27c75d6fe2120fffdd4d97a166e5c8e99/docs-internal/features/features.md)
 because of the latter realization; solving the update problem requires some simplifying assumptions.  
 
@@ -98,11 +98,13 @@ This section describes the proposed user experience embedded in commentary at th
 The flow begins when a user reaches the landing page at `helidon.io`, and assumes that the wizard is an integral part of the 
 existing single page app. The wizard will be developed initially as a separate `start.helidon.io` site, but must then be 
 integrated into the current app to provide a simplified and more seamless experience.
+
+Let's go...
                 
 > Our user reaches the `helidon.io` landing page where she sees a _prominent_ **Try Me** button.
 
-The current `Getting Started` link in the header is changed to `Try Me` and has the same action as the button; leaving this here
-provides easy access when not on the landing page.
+The current `Getting Started` link in the header is changed to `Try Me` and has the same action as the button; leaving this link
+here provides easy access when not on the landing page.
 
 > She clicks the **Try Me** button.
 
@@ -110,11 +112,12 @@ This starts the wizard, which like any other "slide" in the current app just imm
 
 The wizard is composed of steps, each of which contains one or more related choices along with information to help choose and
 simple navigation to go back to a previous step or cancel. See [here](https://vuetifyjs.com/en/components/steppers/) for an
-example "stepper" UI component with a progress bar naming the current and previous steps.
+example "stepper" UI component with a progress bar naming the current and previous steps. To accomodate multiple steps, we will
+use a [vertical stepper](https://vuetifyjs.com/en/components/steppers/#vertical) with a dynamic rather than a fixes list of steps.  
 
 > She is presented with the choice of SE or MP, with help in the form of both code and overview bullet points. She sees 
 > `Try SE` and `Learn More` buttons under SE, and `Try MP` and `Learn More` under MP. The first progress element is shown naming
-> this step (e.g. `SE or MP`).
+> this step (e.g. `Helidon SE or MP`).
 
 The help content here is just like the current `Getting Started` page. 
 
@@ -137,7 +140,7 @@ to a previous step via the progress indicator or to another part of `helidon.io`
 Some steps will activate a `Try It` button once enough choices have been made to do so. Some steps will support further
 customization, and on those a `Customize It` button will activate. Some steps will activate both.
 
-When a base application has supported features, steps associated with these are activated. At each step, the user will have both
+When a base application supports features, steps associated with these are activated. At each step, the user will have both
 the `Try It` and `Customize It` buttons enabled to either stop or go on to the next feature.
  
 Some features require selection of a single implementation among the available choices, some may require one or more related
@@ -163,8 +166,8 @@ We're now ready to generate the project. We:
 1. Generate the project and create a zip file. (In the future, we can also support creating a GitHub repo.)
 2. Render the generated README.md file.
 
-> She sees the zip file download begin, along with short instructions to unpack and cd into the directory that are specific to 
-> her operating system. The rendered README is also displayed, which contains further instructions and documentation. 
+> She sees the zip file download begin, along with short instructions (specific to her OS) to unpack and cd into the directory. 
+> The rendered README is also displayed, which contains further instructions and documentation. 
 
 
 ## Deliverables
