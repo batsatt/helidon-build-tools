@@ -34,8 +34,8 @@ and wants to add or remove features the correctness requirement becomes an extre
 deferred the [first attempt at supporting features](https://github.com/tomas-langer/helidon/blob/e47f1fe27c75d6fe2120fffdd4d97a166e5c8e99/docs-internal/features/features.md)
 because of the latter realization; solving the update problem requires some simplifying assumptions.  
 
-Further, the scope of this project has been expanded in light of the recognition that we must augment our current documentation
-only Quickstart experience with a simpler and more interactive one for new users. The important additions are:
+Further, the scope of this project has been expanded in light of the recognition that we must augment/replace our current 
+documentation only Quickstart experience with a simpler and more interactive one for new users. The important additions are:
 
 1. A web UI that guides creation and initial use of a new project. 
 1. A REST service, both for the web UI and to enable third party (e.g. IDEs) UIs.   
@@ -43,10 +43,14 @@ only Quickstart experience with a simpler and more interactive one for new users
 
 ## Non Goals
 
-Given the high likelihood of introducing errors, direct modification of an existing project will not be supported. As an
+1. Given the high likelihood of introducing errors, direct modification of an existing project will not be supported. As an
 admittedly poor substitute, we can (eventually) follow the Micronaut `feature diff` model and rely on knowledgeable users to 
 apply and merge. (Note that in the CLI we _may_ be able to do better if the project is a git repo, since we can run 
 `git apply --check` to see if the merge would succeed and then apply it if so, all under some new flag.)
+   
+2. SEO. Ultimately we need users to be able to find relevant parts of `helidon.io` via expected search patterns (e.g. 
+   "get started with helidon", "what is helidon", etc.) but this is a complex task to do properly, and may require significant
+   changes to the site implementation (i.e. so that it can support non-anchor URLs).
 
 ## Goals
 
@@ -84,31 +88,82 @@ a deeper set of user stories and goals.
 
            
 ## User Experience
+
+This section describes the proposed user experience embedded in commentary at this level, like so:
+
+> { _user experience here_ }
+
+The flow begins when a user reaches the landing page at `helidon.io`, and assumes that the wizard is an integral part of the 
+existing single page app. The wizard will be developed initially as a separate `start.helidon.io` site, but must then be 
+integrated into the current app to provide a simplified and more seamless experience.
                 
-The helidon.io landing page has a big "Try Me" button (replacing the "Getting Started" link); clicking this button starts the
-wizard.
+> Our user reaches the `helidon.io` landing page where she sees a _prominent_ **Try Me** button.
+
+The current `Getting Started` link in the header is changed to `Try Me` and has the same action as the button; leaving this here
+provides easy access when not on the landing page.
+
+> She clicks the **Try Me** button.
+
+This starts the wizard, which like any other "slide" in the current app just immediately replaces the page content. 
 
 The wizard is composed of steps, each of which contains one or more related choices along with information to help choose and
-simple navigation to go back to a previous step or cancel. See [here](https://vuetifyjs.com/en/components/steppers/) for an 
-example "stepper" UI component. Steps are nodes in a graph which is optimized to reach termination quickly. Termination
-results in the following user experience:
+simple navigation to go back to a previous step or cancel. See [here](https://vuetifyjs.com/en/components/steppers/) for an
+example "stepper" UI component with a progress bar naming the current and previous steps.
 
-1. A zip file download is started.
-2. The embedded README is rendered, containing further instructions and documentation.
+> She is presented with the choice of SE or MP, with help in the form of both code and overview bullet points. She sees 
+> `Try SE` and `Learn More` buttons under SE, and `Try MP` and `Learn More` under MP. The first progress element is shown naming
+> this step (e.g. `SE or MP`).
 
-The first step selects SE or MP, with both code and overview bullet points like the current "Getting Started" page.
+The help content here is just like the current `Getting Started` page. 
 
-The next step selects either among a set of predefined apps (e.g. `Hello World`, `JPA with Hibernate & UCP`, etc.) or further 
-customization. If a predefined app is selected the wizard terminates as describe above, otherwise...
+The `Learn More` buttons exit the wizard and lead to documentation as they do today. Alternatively, they could simply open a new
+tab and not exit the wizard. TBD.
 
-Further customization steps selects among the available SE or MP application types, then among the features applicable to the
-selected type.
+The `Try SE` and `Try MP` buttons replace the `GET STARTED` buttons, and lead to the next step of the wizard rather than to 
+documentation as they do today.
 
+> She clicks the `Try MP` button, and proceeds to the next step. A new `Application` progress element is added naming this 
+> step. She is asked to select from among a small list of base applications (e.g. `Hello World`, `JPA with Hibernate & UCP`, etc.)
+> via radio buttons. Each app has associated help that describes what it does.
+ 
+SE and MP may have different sets of base applications.
+
+Steps are nodes in a graph which is optimized to reach termination quickly. Think of the user experience as a path through a
+series of choices, where the previous choices dictate which choices are presented next. At any point the user can navigate back
+to a previous step via the progress indicator or to another part of `helidon.io` to cancel.
+
+Some steps will activate a `Try It` button once enough choices have been made to do so. Some steps will support further
+customization, and on those a `Customize It` button will activate. Some steps will activate both.
+
+When a base application has supported features, steps associated with these are activated. At each step, the user will have both
+the `Try It` and `Customize It` buttons enabled to either stop or go on to the next feature.
+ 
 Some features require selection of a single implementation among the available choices, some may require one or more related
-components to be selected. Some combinations of features may require automatic inclusion of "hidden features" (e.g. for 
+components to be selected. Some combinations of features may require automatic inclusion of "hidden features" (e.g. for
 integration modules such as `helidon-tracing-jersey`).
-              
+
 Docker and Kubernetes support would be modeled and exposed as features.
+                                   
+> She selects `Hello World` and two buttons are activated: `Try It` or `Customize It`.
+
+Any application _can_ be customized further to provide a name, package name, groupId and artifactId, but it is not necessary to
+do so.
+
+> She selects `Customize It` just to see what happens, and proceeds to a step where she can type in values for the required
+> properties. Each field is prefilled with a default, but the first keystroke in a field clears the default and enters that key.
+> The `Customize It` button is deactivated (or removed). She doesn't want to bother doing more, so just clicks `Try It`.
+
+Here she has reached a terminal step. She could have reached the same state by selecting `Try It` on the previous step, or using
+the progress bar here to go back and do so; either of these paths would simply use default values.
+                                                                  
+We're now ready to generate the project. We:
+
+1. Generate the project and create a zip file. (In the future, we can also support creating a GitHub repo.)
+2. Render the generated README.md file.
+
+> She sees the zip file download begin, along with short instructions to unpack and cd into the directory that are specific to 
+> her operating system. The rendered README is also displayed, which contains further instructions and documentation. 
+
 
 ## Deliverables
 
@@ -124,6 +179,10 @@ TODO
 
 TODO
 
-#### Web UI
+#### Wizard UI
+
+TODO
+
+#### Wizard Integration
 
 TODO
