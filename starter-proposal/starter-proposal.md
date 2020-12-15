@@ -137,7 +137,7 @@ Steps are nodes in a graph which is optimized to reach termination quickly. Thin
 series of choices, where the previous choices dictate which choices are presented next. At any point the user can navigate back
 to a previous step via the progress bar or to another part of `helidon.io` to cancel.
 
-Some steps will activate a `Try It` button once enough choices have been made to do so. Some steps will support further
+Some steps will activate a `Try It` button since enough choices have been made to do so. Some steps will support further
 customization, and on those a `Customize It` button will activate. Some steps will activate both.
 
 When a base application supports features, steps associated with these are activated. At each step, the user will have both
