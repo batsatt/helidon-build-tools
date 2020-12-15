@@ -113,7 +113,7 @@ This starts the wizard, which like any other "slide" in the current app just imm
 The wizard is composed of steps, each of which contains one or more related choices along with information to help choose and
 simple navigation to go back to a previous step or cancel. See [here](https://vuetifyjs.com/en/components/steppers/) for an
 example "stepper" UI component with a progress bar naming the current and previous steps. To accomodate multiple steps, we will
-use a [vertical stepper](https://vuetifyjs.com/en/components/steppers/#vertical) with a dynamic rather than a fixes list of steps.  
+use a [vertical stepper](https://vuetifyjs.com/en/components/steppers/#vertical) with a dynamic rather than a fixed list of steps.  
 
 > She is presented with the choice of SE or MP, with help in the form of both code and overview bullet points. She sees 
 > `Try SE` and `Learn More` buttons under SE, and `Try MP` and `Learn More` under MP. The first progress element is shown naming
