@@ -43,18 +43,19 @@ documentation only Quickstart experience with a simpler and more interactive one
 
 ## Non Goals
 
-1. Given the high likelihood of introducing errors, direct modification of an existing project will not be supported. As an
-admittedly poor substitute, we can (eventually) follow the Micronaut `feature diff` model and rely on knowledgeable users to 
-apply and merge. (Note that in the CLI we _may_ be able to do better if the project is a git repo, since we can run 
-`git apply --check` to see if the merge would succeed and then apply it if so, all under some new flag.)
+1. Feature add/remove. Given the high likelihood of introducing errors, direct modification of an existing project will not be 
+   supported. As an admittedly poor substitute, we can (eventually) follow the Micronaut `feature diff` model and rely on 
+   knowledgeable users to apply and merge. (Note that in the CLI we _may_ be able to do better if the project is a git repo, 
+   since we can run `git apply --check` to see if the merge would succeed and then apply it if so, all under some new flag.)
    
 2. SEO. Ultimately we need users to be able to find relevant parts of `helidon.io` via expected search patterns (e.g. 
    "get started with helidon", "what is helidon", etc.) but this is a complex task to do properly, and may require significant
-   changes to the site implementation (i.e. so that it can support non-anchor URLs).
+   changes to the site implementation (i.e. so that it can support non-anchor URLs). We _may_ be able to do some very simple
+   optimizations to support searches that target the landing page.
 
 ## Goals
 
-1. Ensure that a potential user can search the web and try out Helidon with a minimum of steps.
+1. Ensure that a potential user can try out Helidon with a minimum of steps.
 1. Enhance our "Getting Started" page with a _guided_ experience ("wizard") that provides help and exposes complexity only as needed.
 1. Provide single-click shortcuts (e.g. "Hello World") in the wizard for common cases.    
 1. Expose the archetype data model via a service so that IDE vendors can use to add project creation support.
@@ -62,6 +63,7 @@ apply and merge. (Note that in the CLI we _may_ be able to do better if the proj
 
 ## Stretch Goals
  
+1. Minimal SEO to support searches like "what is helidon" and "how do I try helidon" etc. that resolve to the landing page.
 1. Provide wizard pathways tailored for users with different backgrounds, e.g. Spring Boot, Java EE, Helidon expert, etc.
 
 
