@@ -133,9 +133,13 @@ documentation as they do today.
  
 SE and MP may have different sets of base applications.
 
-Steps are nodes in a graph which is optimized to reach termination quickly. Think of the user experience as a path through a
-series of choices, where the previous choices dictate which choices are presented next. At any point the user can navigate back
-to a previous step via the progress bar or to another part of `helidon.io` to cancel.
+Steps are nodes in a directed acyclic graph which is optimized to reach termination quickly. It is a variant of a 
+[decision tree](https://en.wikipedia.org/wiki/Decision_tree), where each decision leads to another or to termination and
+the creation of the starter project.
+
+The user follows a path through a series of choices, where each choice contains help and previous choices dictate which choices 
+are presented next. At any point the user can navigate back to a previous step via the progress bar or to another part of 
+`helidon.io` to cancel.
 
 Some steps will activate a `Try It` button since enough choices have been made to do so. Some steps will support further
 customization, and on those a `Customize It` button will activate. Some steps will activate both.
