@@ -188,10 +188,14 @@ TODO
 
 TODO
 
-#### Wizard UI
+#### Wizard UI: `start.helidon.io`
 
 TODO
 
-#### Wizard Integration
+#### Wizard Integration: `helidon.io` 
+
+TODO
+
+#### CLI Updates
 
 TODO
