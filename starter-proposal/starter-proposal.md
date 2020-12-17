@@ -25,7 +25,7 @@ Relationships _across_ features must also be modelled somehow, e.g.
 1. `X precedes Y`
 
 In addition to producing and maintaining this data, the use of it implies some form of _merge_. At project creation, a base 
-archetype must be merged with feature content, and the result must be both functional and properly formatted. A good templating
+archetype must be merged with feature content, and the result must be both correct and properly formatted. A good templating
 mechanism should be sufficient for this (perhaps with some post-processing to format), but to add or remove features from
 a previously created project requires an actual merge. 
 
@@ -58,7 +58,7 @@ documentation only Quickstart experience with a simpler and more interactive one
 1. Ensure that a potential user can try out Helidon with a minimum of steps.
 1. Enhance our "Getting Started" page with a _guided_ experience ("wizard") that provides help and exposes complexity only as needed.
 1. Provide single-click shortcuts (e.g. "Hello World") in the wizard for common cases.    
-1. Expose the archetype data model via a service so that IDE vendors can use to add project creation support.
+1. Expose the archetype data model via a service so that IDE vendors can use it to add project creation support.
 1. Ensure that the CLI `init` command matches the wizard as much as is reasonable.
 
 ## Stretch Goals
