@@ -35,22 +35,22 @@ deferred the [first attempt at supporting features](https://github.com/tomas-lan
 because of the latter realization; solving the update problem requires some simplifying assumptions.  
 
 Further, the scope of this project has been expanded in light of the recognition that we must augment/replace our current 
-documentation only Quickstart experience with a simpler and more interactive one for new users. The important additions are:
+documentation-only Quickstart experience with a simpler and more interactive one for new users. The important additions are:
 
 1. A web UI that guides creation and initial use of a new project. 
-1. A REST service, both for the web UI and to enable third party (e.g. IDEs) UIs.   
+1. A REST service, both for the web UI and to enable third party UIs (e.g. IDEs).   
        
 
 ## Non Goals
 
 1. Feature add/remove. Given the high likelihood of introducing errors, direct modification of an existing project will not be 
    supported. As an admittedly poor substitute, we can (eventually) follow the Micronaut `feature diff` model and rely on 
-   knowledgeable users to apply and merge. (Note that in the CLI we _may_ be able to do better if the project is a git repo, 
+   knowledgeable users to apply and merge. (Note that in the CLI we may be able to do better if the project is a git repo, 
    since we can run `git apply --check` to see if the merge would succeed and then apply it if so, all under some new flag.)
    
 2. SEO. Ultimately we need users to be able to find relevant parts of `helidon.io` via expected search patterns (e.g. 
    "get started with helidon", "what is helidon", etc.) but this is a complex task to do properly, and may require significant
-   changes to the site implementation (i.e. so that it can support non-anchor URLs). We _may_ be able to do some very simple
+   changes to the site implementation (i.e. so that it can support non-anchor URLs). We may be able to do some very simple
    optimizations to support searches that target the landing page.
 
 ## Goals
